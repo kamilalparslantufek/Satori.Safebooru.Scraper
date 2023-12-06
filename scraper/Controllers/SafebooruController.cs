@@ -4,22 +4,14 @@ namespace scraper.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class SafebooruController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
-
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
-
-
-    public async Task<String> maxId()
+    
+    private async Task<String> maxId()
     {
         // sayfaya giriş yap
         var url = "https://safebooru.org/index.php?page=post&s=list";
@@ -32,12 +24,12 @@ public class WeatherForecastController : ControllerBase
         return lastId;
     }
 
-    public async Task<String> getRandomImage()
+    private async Task<String> getRandomImage()
     {
         var lastId = await maxId();
         var integer = int.Parse(lastId);
-        var id = new Random(integer);
-        var itemUrl = $"https://safebooru.org/index.php?page=post&s=view&id={id}";
+        var id = new Random(integer).Next();
+        var itemUrl = $"https://safebooru.org/index.php?page=post&s=view&id={lastId}";
         //resim bilgileri
         var web = new HtmlAgilityPack.HtmlWeb();
         var itemPage = web.Load(itemUrl);
@@ -59,7 +51,7 @@ public class WeatherForecastController : ControllerBase
         return Newtonsoft.Json.JsonConvert.SerializeObject(new { itemUrl, src, tagList });
     }
 
-
+    [HttpGet("Random")]
     public async Task<String?> GetMax()
     {
         
