@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "M4UWpvkIVaN/NrythZEZeVlFyl9dJxTm5WMq4UW+m2o=",
+  "Source": "scraper",
+  "BasePath": "_content/scraper",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
