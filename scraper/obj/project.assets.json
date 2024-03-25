@@ -571,11 +571,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zenam/Projects/scraper/scraper/scraper.csproj",
+      "projectUniqueName": "/Users/zenam/Projects/Satori.Safebooru.Scraper/scraper/scraper.csproj",
       "projectName": "scraper",
-      "projectPath": "/Users/zenam/Projects/scraper/scraper/scraper.csproj",
+      "projectPath": "/Users/zenam/Projects/Satori.Safebooru.Scraper/scraper/scraper.csproj",
       "packagesPath": "/Users/zenam/.nuget/packages/",
-      "outputPath": "/Users/zenam/Projects/scraper/scraper/obj/",
+      "outputPath": "/Users/zenam/Projects/Satori.Safebooru.Scraper/scraper/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/zenam/.nuget/NuGet/NuGet.Config"

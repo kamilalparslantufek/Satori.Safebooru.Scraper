@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RLAtGxAE2q8vFsmq4UdI3j/gga5gDK7O4zl3WVXT4OuPmK8PEUtNglK/OvAM7+PeWeSQvun1mJKDBecqDGiaOw==",
+  "dgSpecHash": "vMAsFHCDmja5poGD63AHc0RwjygZFkVe5mfFJ8dJ+/WED5ca5+V8uMxIU4xlEAZiakvtNV2f89asTK2qp2lJDg==",
   "success": true,
-  "projectFilePath": "/Users/zenam/Projects/scraper/scraper/scraper.csproj",
+  "projectFilePath": "/Users/zenam/Projects/Satori.Safebooru.Scraper/scraper/scraper.csproj",
   "expectedPackageFiles": [
     "/Users/zenam/.nuget/packages/htmlagilitypack/1.11.54/htmlagilitypack.1.11.54.nupkg.sha512",
     "/Users/zenam/.nuget/packages/microsoft.aspnetcore.openapi/7.0.5/microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",

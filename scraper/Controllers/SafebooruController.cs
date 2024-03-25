@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using scraper.Entity;
 
 namespace scraper.Controllers;
 
@@ -6,10 +7,16 @@ namespace scraper.Controllers;
 [Route("[controller]")]
 public class SafebooruController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
+    InstagramService _service;
+    private readonly Random random;
+
+
+    public SafebooruController(IHttpClientFactory _factory, Random random)
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        _service = new InstagramService(_factory);
+        this.random = random;
+    }
+
     
     private async Task<String> maxId()
     {
@@ -24,12 +31,12 @@ public class SafebooruController : ControllerBase
         return lastId;
     }
 
-    private async Task<String> getRandomImage()
+    private async Task<RandomImage> getRandomImage()
     {
         var lastId = await maxId();
         var integer = int.Parse(lastId);
-        var id = new Random(integer).Next();
-        var itemUrl = $"https://safebooru.org/index.php?page=post&s=view&id={lastId}";
+        var id = random.Next(integer);
+        var itemUrl = $"https://safebooru.org/index.php?page=post&s=view&id={id}";
         //resim bilgileri
         var web = new HtmlAgilityPack.HtmlWeb();
         var itemPage = web.Load(itemUrl);
@@ -48,14 +55,28 @@ public class SafebooruController : ControllerBase
             }
         }
 
-        return Newtonsoft.Json.JsonConvert.SerializeObject(new { itemUrl, src, tagList });
+        return new RandomImage(){ ItemUrl= itemUrl, Src = src, TagList = tagList.ToArray() };
     }
 
     [HttpGet("Random")]
-    public async Task<String?> GetMax()
+    public async Task<RandomImage?> GetMax()
     {
         
         return await getRandomImage();
     }
-}
+    [HttpPost("Container/Create")]
+    public async Task<String?> CreateRandomContainer()
+    {
+        var image = await getRandomImage();
+        var res = await _service.CreateContainer("caption, automation test", image.Src);
+        return res;
+    }
 
+    [HttpGet("Container/Status/{containerId}")]
+    public async Task<String?> GetContainerStatus(string containerId)
+        => await _service.CheckContainerStatus(containerId);
+
+    [HttpPost("Container/Publish")]
+    public async Task<String?> PublishContainer(string containerId)
+        => await _service.PublishContainer(containerId);
+}
